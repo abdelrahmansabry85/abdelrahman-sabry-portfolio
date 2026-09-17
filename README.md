@@ -1,18 +1,119 @@
 # Abdelrahman Sabry — Portfolio
 
-A React + TypeScript one-page portfolio with a dark, editorial interface-engineering visual system.
+> Front-end engineer building clear, responsive interfaces with React and TypeScript.
+
+[![Live website](https://img.shields.io/badge/Live%20website-abdelrahman--sabry--portfolio.vercel.app-d8fb65?style=flat-square&labelColor=090b0f)](https://abdelrahman-sabry-portfolio.vercel.app)
+[![GitHub](https://img.shields.io/badge/GitHub-abdelrahmansabry85-181717?style=flat-square&logo=github)](https://github.com/abdelrahmansabry85/abdelrahman-sabry-portfolio)
+[![Built with React](https://img.shields.io/badge/React-TypeScript-61dafb?style=flat-square&logo=react&logoColor=111518)](https://react.dev/)
+
+## Overview
+
+This is a one-page personal portfolio for Abdelrahman Sabry, a front-end engineer and data engineering trainee. The site presents selected web projects, a practical toolset, services, project evidence, additional presentations, a downloadable CV, and direct contact links in one focused experience.
+
+The visual direction is dark and editorial, with a light-mode alternative, an animated front-end stack orbit, real project screenshots, icon-based tool cards, smooth section transitions, and responsive layouts for mobile and desktop.
+
+## Featured work
+
+| Project | Description | Live site |
+| --- | --- | --- |
+| **MediDash** | Online medical system focused on doctor discovery, bookings, records, and an AI assistant. | [Open project](https://la-phi.vercel.app/) |
+| **Mostafa Teacher Hub** | Arabic-first information site for a teacher’s schedule, address, timing, and AI-powered revision quizzes. | [Open project](https://mrmostafamashaly.vercel.app/) |
+
+### Project screenshots
+
+<p>
+  <img src="./public/medidash.png" alt="MediDash landing page" width="49%" />
+  <img src="./public/mostafa-teacher-hub.png" alt="Mostafa Teacher Hub landing page" width="49%" />
+</p>
+
+Each project includes a case-study expansion with the role, intended outcome, project context, and technology details.
+
+## What is included
+
+- About section focused on front-end engineering and practical English-education support
+- Selected work with real landing-page screenshots and live links
+- Animated stack marquee and icon-based tools grid
+- Services for front-end engineering, data cleaning, technical content, presentations, and documentation
+- Selected MediDash presentations, technical documentation, and downloadable CV
+- Separate presentation section for the supplied Messi and AI/n8n PDFs
+- One-page resume section with a branded CV download
+- Email, WhatsApp, LinkedIn, and X contact links
+- Dark and light themes with persisted preference
+- Responsive layout for mobile, tablet, and desktop
+
+## Technology
+
+- React
+- TypeScript
+- Vite
+- React Icons
+- HTML5 and CSS3
+- Bootstrap-informed project experience
+- Vercel deployment
 
 ## Run locally
 
+Requirements: Node.js 20+ and npm.
+
 ```bash
+git clone https://github.com/abdelrahmansabry85/abdelrahman-sabry-portfolio.git
+cd abdelrahman-sabry-portfolio
 npm install
 npm run dev
 ```
 
-## Production build
+Open the local URL shown by Vite, usually `http://localhost:5173`.
+
+## Validate a production build
+
+```bash
+npm run build
+npm run preview
+```
+
+The build runs TypeScript checks before generating the production files in `dist/`.
+
+## Deployment
+
+The production site is deployed on Vercel and connected to the GitHub `main` branch. New pushes to `main` can trigger a new deployment automatically.
 
 ```bash
 npm run build
 ```
 
-The portfolio is one scrollable page with About, Work, Tools, Services, Selected Documents, Additional Presentations, Resume, and Contact sections. Both project case studies use local landing-page screenshots (`public/medidash.png` and `public/mostafa-teacher-hub.png`) and expose their outcomes, roles, and technology details on demand. The supplied CV is downloadable at `public/documents/Abdelrahman-Sabry-CV.pdf`; the MediDash presentations and technical documentation are available in `public/documents`. The two additional presentation PDFs supplied later, with extracted cover thumbnails, are available in `public/editorial`. The post-editing card remains clearly marked until a real post-editing sample is supplied.
+Vercel uses the project configuration in [`vercel.json`](./vercel.json): `npm run build` with `dist/` as the output directory.
+
+## Project files
+
+```text
+src/
+  App.tsx        Page sections, content, interactions, and project data
+  styles.css     Responsive visual system, themes, and animations
+  main.tsx       React entry point
+public/
+  documents/     CV, MediDash decks, and technical documentation
+  editorial/     Additional presentation PDFs and cover thumbnails
+  *.png          Real project landing-page screenshots
+```
+
+## Documents
+
+The repository includes the supplied work samples as downloadable public assets:
+
+- [Branded CV](./public/documents/Abdelrahman-Sabry-CV.pdf)
+- [MediDash final presentation](./public/documents/MediDash-Presentation-Final.pptx)
+- [MediDash first-semester presentation](./public/documents/MediDash-Presentation-First-Semester.pptx)
+- [MediDash technical documentation](./public/documents/MediDash-Technical-Documentation.pdf)
+- [Messi and His Impact on Argentina](./public/editorial/Messi-and-His-Impact-on-Argentina.pdf)
+- [AI Systems and the n8n Tool](./public/editorial/Arabic-Editorial-Presentation.pdf)
+
+## Contact
+
+- Email: [mobodymo6@gmail.com](mailto:mobodymo6@gmail.com)
+- WhatsApp: [Message on WhatsApp](https://wa.me/201553258929)
+- LinkedIn: [Abdelrahman Sabry](https://www.linkedin.com/in/abdelrahman-sabry-b36500275/)
+- X: [@abosabrynbo](https://x.com/abosabrynbo)
+
+## License
+
+This is a personal portfolio repository. No open-source license is currently declared; please contact Abdelrahman before reusing personal content, documents, or project assets.
