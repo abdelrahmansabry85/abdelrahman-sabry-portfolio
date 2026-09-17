@@ -4,3 +4,5 @@ dist/
 *.local
 .freebuff/
 tmp/
+
+.vercel
