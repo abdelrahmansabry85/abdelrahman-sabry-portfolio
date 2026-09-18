@@ -3,7 +3,7 @@
 > Front-end engineer building clear, responsive interfaces with React and TypeScript.
 
 [![Live website](https://img.shields.io/badge/Live%20website-abdelrahman--sabry--portfolio.vercel.app-d8fb65?style=flat-square&labelColor=090b0f)](https://abdelrahman-sabry-portfolio.vercel.app)
-[![GitHub](https://img.shields.io/badge/GitHub-abdelrahmansabry85-181717?style=flat-square&logo=github)](https://github.com/abdelrahmansabry85/abdelrahman-sabry-portfolio)
+[![GitHub profile](https://img.shields.io/badge/GitHub-abdelrahmansabry85-181717?style=flat-square&logo=github)](https://github.com/abdelrahmansabry85)
 [![Built with React](https://img.shields.io/badge/React-TypeScript-61dafb?style=flat-square&logo=react&logoColor=111518)](https://react.dev/)
 
 ## Overview
@@ -11,6 +11,14 @@
 This is a one-page personal portfolio for Abdelrahman Sabry, a front-end engineer and data engineering trainee. The current homepage focuses on selected web projects, a practical toolset, services, a downloadable CV, and direct contact links. Presentation and documentation assets remain stored in the repository for a dedicated documents page later.
 
 The visual direction is dark and editorial, with a light-mode alternative, an animated front-end stack orbit, real project screenshots, icon-based tool cards, smooth section transitions, and responsive layouts for mobile and desktop.
+
+## Quick links
+
+- [Live portfolio](https://abdelrahman-sabry-portfolio.vercel.app)
+- [GitHub profile](https://github.com/abdelrahmansabry85)
+- [Source repository](https://github.com/abdelrahmansabry85/abdelrahman-sabry-portfolio)
+- [LinkedIn](https://www.linkedin.com/in/abdelrahman-sabry-b36500275/)
+- [X](https://x.com/abosabrynbo)
 
 ## Featured work
 
