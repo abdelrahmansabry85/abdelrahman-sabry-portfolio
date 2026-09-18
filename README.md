@@ -34,6 +34,7 @@ Each project includes a case-study expansion with the role, intended outcome, pr
 - Selected work with real landing-page screenshots and live links
 - Animated stack marquee and icon-based tools grid
 - Services for front-end engineering, data cleaning, technical content, presentations, and documentation
+- Compact certifications section linking to the public LinkedIn certifications page
 - Downloadable CV, with presentation and documentation assets preserved for a future documents page
 - One-page resume section with a branded CV download
 - Email, WhatsApp, LinkedIn, and X contact links

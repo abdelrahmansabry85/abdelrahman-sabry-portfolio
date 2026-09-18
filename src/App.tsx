@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
-import { FiAperture, FiBookOpen, FiCode, FiCpu, FiDownload, FiEdit3, FiFileText, FiLayers, FiMessageCircle, FiMonitor, FiMoon, FiSun } from 'react-icons/fi'
+import { FiAperture, FiAward, FiBookOpen, FiCode, FiCpu, FiDownload, FiEdit3, FiFileText, FiLayers, FiMessageCircle, FiMonitor, FiMoon, FiSun } from 'react-icons/fi'
 import { FaEnvelope, FaFileExcel, FaFilePowerpoint, FaFileWord, FaLinkedinIn, FaWhatsapp, FaXTwitter } from 'react-icons/fa6'
 import { SiBootstrap, SiCss, SiFigma, SiGithub, SiHtml5, SiJavascript, SiPostgresql, SiReact, SiTypescript, SiVite } from 'react-icons/si'
 import type { IconType } from 'react-icons'
@@ -63,13 +63,21 @@ const editorialPresentations = [
   },
 ]
 
+const linkedinCertificationsUrl = 'https://www.linkedin.com/in/abdelrahman-sabry-b36500275/details/certifications/'
+const certifications = [
+  { title: 'Prompt Engineering', issuer: 'Dubai Future Foundation', date: 'Issued July 2026' },
+  { title: 'EF SET English Certificate', issuer: 'EF SET', date: 'Issued June 2026' },
+  { title: 'Responsive Web Design', issuer: 'freeCodeCamp', date: 'Issued July 2025' },
+  { title: 'Web development', issuer: 'SoloLearn', date: 'Certificate listed on LinkedIn' },
+]
+
 function Brand() {
   return <a className="brand" href="#top" aria-label="Abdelrahman Sabry home"><span className="brand-sigil"><FiAperture /></span><span className="brand-name">ABDELRAHMAN<br /><b>SABRY</b></span></a>
 }
 
 function Nav({ light, onTheme }: { light: boolean; onTheme: () => void }) {
   const [open, setOpen] = useState(false)
-  const links = [['about', 'About'], ['work', 'Work'], ['tools', 'Tools'], ['services', 'Services'], ['resume', 'Resume'], ['contact', 'Contact']]
+  const links = [['about', 'About'], ['work', 'Work'], ['tools', 'Tools'], ['services', 'Services'], ['certifications', 'Certifications'], ['resume', 'Resume'], ['contact', 'Contact']]
   return <header className="site-header"><div className="nav-shell"><Brand /><button className="mobile-toggle" onClick={() => setOpen(!open)} aria-expanded={open} aria-label="Toggle navigation"><span /><span /></button><nav className={open ? 'site-nav is-open' : 'site-nav'}>{links.map(([id, label], index) => <a key={id} href={`#${id}`} onClick={() => setOpen(false)}><span>0{index + 1}</span>{label}</a>)}</nav><button className="theme-toggle" onClick={onTheme} aria-label={light ? 'Switch to dark mode' : 'Switch to light mode'}>{light ? <FiMoon /> : <FiSun />}<span>{light ? 'DARK' : 'LIGHT'}</span></button></div></header>
 }
 
@@ -124,7 +132,7 @@ function TypedName() {
 }
 
 function Hero() {
-  return <section className="hero page-shell" id="top"><div className="hero-copy"><p className="hello">Hello, I am</p><TypedName /><p className="hero-role"><span>Front-end</span> Engineer <i>/</i> Data-minded builder</p><p className="hero-intro">I build clear, responsive interfaces for people who need digital work to feel simple, useful, and considered.</p><div className="hero-actions"><a className="button" href="#work">Explore my work</a><a className="button button-dark" href="#contact"><FiMessageCircle /> Let’s talk</a><a className="button button-quiet" href="/documents/Abdelrahman-Sabry-CV.pdf" download><FiDownload /> Download CV</a></div></div><div className="hero-aside"><StackOrbit /><p className="hero-note">React · TypeScript · UI systems</p></div><span className="hero-index">01 / 06</span></section>
+  return <section className="hero page-shell" id="top"><div className="hero-copy"><p className="hello">Hello, I am</p><TypedName /><p className="hero-role"><span>Front-end</span> Engineer <i>/</i> Data-minded builder</p><p className="hero-intro">I build clear, responsive interfaces for people who need digital work to feel simple, useful, and considered.</p><div className="hero-actions"><a className="button" href="#work">Explore my work</a><a className="button button-dark" href="#contact"><FiMessageCircle /> Let’s talk</a><a className="button button-quiet" href="/documents/Abdelrahman-Sabry-CV.pdf" download><FiDownload /> Download CV</a></div></div><div className="hero-aside"><StackOrbit /><p className="hero-note">React · TypeScript · UI systems</p></div><span className="hero-index">01 / 07</span></section>
 }
 
 function About() {
@@ -149,6 +157,10 @@ function Services() {
   return <section className="services-section page-shell section-space" id="services"><SectionLabel index="04">What I can help with</SectionLabel><Reveal className="services-intro"><h2>From first idea<br /><em>to finished detail.</em></h2><p>Choose the kind of support you need and take it straight to the conversation. Every service starts with understanding the real problem.</p></Reveal><Reveal className="services-list" delay={100}>{services.map(({ title, text, Icon }) => <a className="service-row" href="#contact" key={title}><Icon className="service-icon" /><div><h3>{title}</h3><span>DISCUSS THIS SERVICE</span></div><p>{text}</p></a>)}</Reveal></section>
 }
 
+function Certifications() {
+  return <section className="certifications-section page-shell section-space" id="certifications"><div className="section-head"><SectionLabel index="05">Certifications</SectionLabel><span className="section-aside">04 verified entries</span></div><Reveal className="certifications-grid">{certifications.map(({ title, issuer, date }, index) => <a className="certification-card" href={linkedinCertificationsUrl} target="_blank" rel="noreferrer" key={title} style={{ '--cert-delay': `${index * 70}ms` } as CSSProperties}><span className="certification-icon"><FiAward /></span><span className="certification-issuer">{issuer}</span><h3>{title}</h3><span className="certification-date">{date}</span><span className="certification-link">VIEW CREDENTIAL ON LINKEDIN</span></a>)}</Reveal></section>
+}
+
 function Documents() {
   return <section className="documents-section page-shell section-space" id="documents"><SectionLabel index="05">Selected documents</SectionLabel><div className="documents-intro"><h2>Proof in<br /><em>the details.</em></h2><p>Real project evidence, available to open and download. The post-editing sample remains clearly marked until you add the original file.</p></div><div className="documents-grid">{documents.map(({ type, title, text, Icon, href, secondaryHref, secondaryStatus, status }) => <article className="document-card" key={title}><div className="document-icon"><Icon /></div><span className="document-type">{type}</span><h3>{title}</h3><p>{text}</p>{href ? <div className="document-links"><a className="document-status document-link" href={href} download>{status}<FiDownload /></a>{secondaryHref && <a className="document-status document-link" href={secondaryHref} download>{secondaryStatus}<FiDownload /></a>}</div> : <span className="document-status">{status}</span>}</article>)}</div></section>
 }
@@ -158,11 +170,11 @@ function EditorialWork() {
 }
 
 function Resume() {
-  return <section className="resume-section page-shell section-space" id="resume"><div className="resume-head"><SectionLabel index="05">One-page resume</SectionLabel><a className="resume-download" href="/documents/Abdelrahman-Sabry-CV.pdf" download><FiDownload /> Download CV</a></div><Reveal className="resume-layout"><div className="resume-intro"><h2>Front-end engineer<br /><em>with a data mindset.</em></h2><p>Computer Science graduate building responsive interfaces, structured workflows, and useful digital systems.</p></div><div className="resume-content"><div className="resume-block"><span>PROFILE</span><p>Front-end developer with a foundation in React, TypeScript, JavaScript, Bootstrap, and responsive UI. C1-level English with practical experience supporting an English teacher and post-editing educational content.</p></div><div className="resume-block"><span>EXPERIENCE</span><div><strong>Microsoft Data Engineer Track Trainee</strong><small>Digital Egypt Pioneers Initiative · 2026—Present</small><p>Training in database administration, data pipelines, data cleaning, and modern processing workflows.</p></div></div><div className="resume-block"><span>EDUCATION</span><div><strong>B.Sc. Computer Science & Information Systems</strong><small>El Shorouk Academy · 2022—2026</small></div></div><div className="resume-block"><span>CAPABILITIES</span><div className="resume-tags">{['React', 'TypeScript', 'JavaScript', 'Bootstrap', 'Responsive UI', 'Data cleaning', 'Excel', 'PowerPoint', 'Technical documentation'].map((item) => <span key={item}>{item}</span>)}</div></div></div></Reveal></section>
+  return <section className="resume-section page-shell section-space" id="resume"><div className="resume-head"><SectionLabel index="06">One-page resume</SectionLabel><a className="resume-download" href="/documents/Abdelrahman-Sabry-CV.pdf" download><FiDownload /> Download CV</a></div><Reveal className="resume-layout"><div className="resume-intro"><h2>Front-end engineer<br /><em>with a data mindset.</em></h2><p>Computer Science graduate building responsive interfaces, structured workflows, and useful digital systems.</p></div><div className="resume-content"><div className="resume-block"><span>PROFILE</span><p>Front-end developer with a foundation in React, TypeScript, JavaScript, Bootstrap, and responsive UI. C1-level English with practical experience supporting an English teacher and post-editing educational content.</p></div><div className="resume-block"><span>EXPERIENCE</span><div><strong>Microsoft Data Engineer Track Trainee</strong><small>Digital Egypt Pioneers Initiative · 2026—Present</small><p>Training in database administration, data pipelines, data cleaning, and modern processing workflows.</p></div></div><div className="resume-block"><span>EDUCATION</span><div><strong>B.Sc. Computer Science & Information Systems</strong><small>El Shorouk Academy · 2022—2026</small></div></div><div className="resume-block"><span>CAPABILITIES</span><div className="resume-tags">{['React', 'TypeScript', 'JavaScript', 'Bootstrap', 'Responsive UI', 'Data cleaning', 'Excel', 'PowerPoint', 'Technical documentation'].map((item) => <span key={item}>{item}</span>)}</div></div></div></Reveal></section>
 }
 
 function Contact() {
-  return <section className="contact-section page-shell section-space" id="contact"><Reveal className="contact-panel"><div><SectionLabel index="06">Start a conversation</SectionLabel><h2>Have something<br /><em>worth building?</em></h2><p>Send the idea, the question, or the messy first version. I’m open to full-time roles, freelance projects, and good collaborations.</p></div><div className="contact-details"><a className="contact-email" href="mailto:mobodymo6@gmail.com"><FaEnvelope /> mobodymo6@gmail.com</a><a href="https://wa.me/201553258929" target="_blank" rel="noreferrer"><FaWhatsapp /><span>WhatsApp</span><strong>015 5325 8929</strong></a><a href="https://www.linkedin.com/in/abdelrahman-sabry-b36500275/" target="_blank" rel="noreferrer"><FaLinkedinIn /><span>LinkedIn</span><strong>Connect with me</strong></a></div></Reveal></section>
+  return <section className="contact-section page-shell section-space" id="contact"><Reveal className="contact-panel"><div><SectionLabel index="07">Start a conversation</SectionLabel><h2>Have something<br /><em>worth building?</em></h2><p>Send the idea, the question, or the messy first version. I’m open to full-time roles, freelance projects, and good collaborations.</p></div><div className="contact-details"><a className="contact-email" href="mailto:mobodymo6@gmail.com"><FaEnvelope /> mobodymo6@gmail.com</a><a href="https://wa.me/201553258929" target="_blank" rel="noreferrer"><FaWhatsapp /><span>WhatsApp</span><strong>015 5325 8929</strong></a><a href="https://www.linkedin.com/in/abdelrahman-sabry-b36500275/" target="_blank" rel="noreferrer"><FaLinkedinIn /><span>LinkedIn</span><strong>Connect with me</strong></a></div></Reveal></section>
 }
 
 function Footer() {
@@ -172,7 +184,7 @@ function Footer() {
 function App() {
   const [light, setLight] = useState(() => localStorage.getItem('theme') === 'light')
   useEffect(() => { document.body.classList.toggle('light-mode', light); localStorage.setItem('theme', light ? 'light' : 'dark') }, [light])
-  return <div className={light ? 'app theme-light' : 'app'}><Nav light={light} onTheme={() => setLight(!light)} /><main><Hero /><div className="marquee"><div className="marquee-track">FRONT-END ENGINEERING <b>✳</b> REACT + TYPESCRIPT <b>✳</b> USEFUL DIGITAL SYSTEMS <b>✳</b> FRONT-END ENGINEERING <b>✳</b> REACT + TYPESCRIPT <b>✳</b> USEFUL DIGITAL SYSTEMS <b>✳</b></div></div><About /><Work /><Tools /><Services /><Resume /><Contact /></main><Footer /></div>
+  return <div className={light ? 'app theme-light' : 'app'}><Nav light={light} onTheme={() => setLight(!light)} /><main><Hero /><div className="marquee"><div className="marquee-track">FRONT-END ENGINEERING <b>✳</b> REACT + TYPESCRIPT <b>✳</b> USEFUL DIGITAL SYSTEMS <b>✳</b> FRONT-END ENGINEERING <b>✳</b> REACT + TYPESCRIPT <b>✳</b> USEFUL DIGITAL SYSTEMS <b>✳</b></div></div><About /><Work /><Tools /><Services /><Certifications /><Resume /><Contact /></main><Footer /></div>
 }
 
 export default App
