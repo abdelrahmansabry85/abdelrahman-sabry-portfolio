@@ -8,7 +8,7 @@
 
 ## Overview
 
-This is a one-page personal portfolio for Abdelrahman Sabry, a front-end engineer and data engineering trainee. The site presents selected web projects, a practical toolset, services, project evidence, additional presentations, a downloadable CV, and direct contact links in one focused experience.
+This is a one-page personal portfolio for Abdelrahman Sabry, a front-end engineer and data engineering trainee. The current homepage focuses on selected web projects, a practical toolset, services, a downloadable CV, and direct contact links. Presentation and documentation assets remain stored in the repository for a dedicated documents page later.
 
 The visual direction is dark and editorial, with a light-mode alternative, an animated front-end stack orbit, real project screenshots, icon-based tool cards, smooth section transitions, and responsive layouts for mobile and desktop.
 
@@ -34,8 +34,7 @@ Each project includes a case-study expansion with the role, intended outcome, pr
 - Selected work with real landing-page screenshots and live links
 - Animated stack marquee and icon-based tools grid
 - Services for front-end engineering, data cleaning, technical content, presentations, and documentation
-- Selected MediDash presentations, technical documentation, and downloadable CV
-- Separate presentation section for the supplied Messi and AI/n8n PDFs
+- Downloadable CV, with presentation and documentation assets preserved for a future documents page
 - One-page resume section with a branded CV download
 - Email, WhatsApp, LinkedIn, and X contact links
 - Dark and light themes with persisted preference
@@ -98,7 +97,7 @@ public/
 
 ## Documents
 
-The repository includes the supplied work samples as downloadable public assets:
+The repository preserves the supplied work samples as public assets for the planned documents page. They are not currently shown in the homepage navigation:
 
 - [Branded CV](./public/documents/Abdelrahman-Sabry-CV.pdf)
 - [MediDash final presentation](./public/documents/MediDash-Presentation-Final.pptx)

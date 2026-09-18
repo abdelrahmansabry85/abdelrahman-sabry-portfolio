@@ -1,4 +1,4 @@
-import { useEffect, useState, type CSSProperties, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import { FiAperture, FiBookOpen, FiCode, FiCpu, FiDownload, FiEdit3, FiFileText, FiLayers, FiMessageCircle, FiMonitor, FiMoon, FiSun } from 'react-icons/fi'
 import { FaEnvelope, FaFileExcel, FaFilePowerpoint, FaFileWord, FaLinkedinIn, FaWhatsapp, FaXTwitter } from 'react-icons/fa6'
 import { SiBootstrap, SiCss, SiFigma, SiGithub, SiHtml5, SiJavascript, SiPostgresql, SiReact, SiTypescript, SiVite } from 'react-icons/si'
@@ -69,7 +69,7 @@ function Brand() {
 
 function Nav({ light, onTheme }: { light: boolean; onTheme: () => void }) {
   const [open, setOpen] = useState(false)
-  const links = [['about', 'About'], ['work', 'Work'], ['tools', 'Tools'], ['services', 'Services'], ['documents', 'Documents'], ['presentations', 'Presentations'], ['resume', 'Resume'], ['contact', 'Contact']]
+  const links = [['about', 'About'], ['work', 'Work'], ['tools', 'Tools'], ['services', 'Services'], ['resume', 'Resume'], ['contact', 'Contact']]
   return <header className="site-header"><div className="nav-shell"><Brand /><button className="mobile-toggle" onClick={() => setOpen(!open)} aria-expanded={open} aria-label="Toggle navigation"><span /><span /></button><nav className={open ? 'site-nav is-open' : 'site-nav'}>{links.map(([id, label], index) => <a key={id} href={`#${id}`} onClick={() => setOpen(false)}><span>0{index + 1}</span>{label}</a>)}</nav><button className="theme-toggle" onClick={onTheme} aria-label={light ? 'Switch to dark mode' : 'Switch to light mode'}>{light ? <FiMoon /> : <FiSun />}<span>{light ? 'DARK' : 'LIGHT'}</span></button></div></header>
 }
 
@@ -77,17 +77,58 @@ function SectionLabel({ index, children }: { index: string; children: ReactNode 
   return <div className="section-label"><span>{index}</span><span>{children}</span></div>
 }
 
+function Reveal({ children, className = '', delay = 0 }: { children: ReactNode; className?: string; delay?: number }) {
+  const ref = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    const element = ref.current
+    if (!element) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      element.classList.add('is-visible')
+      return
+    }
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        element.classList.add('is-visible')
+        observer.unobserve(element)
+      }
+    }, { threshold: 0.12 })
+    observer.observe(element)
+    return () => observer.disconnect()
+  }, [])
+  return <div ref={ref} className={`reveal ${className}`} style={{ '--reveal-delay': `${delay}ms` } as CSSProperties}>{children}</div>
+}
+
 function StackOrbit() {
   const orbitTools = tools.slice(0, 8)
   return <div className="stack-orbit" aria-label="Animated front-end stack"><div className="orbit-grid" /><div className="orbit-ring ring-one" /><div className="orbit-ring ring-two" /><div className="orbit-center"><span>STACK</span><strong>FRONT-END</strong><small>ENGINEER</small></div><div className="orbit-wheel">{orbitTools.map(({ name, Icon }, index) => <span className="orbit-item" key={name} style={{ '--i': index } as CSSProperties} title={name}><Icon /></span>)}</div></div>
 }
 
+function TypedName() {
+  const firstName = 'Abdelrahman'
+  const lastName = 'Sabry'
+  const totalLength = firstName.length + lastName.length
+  const [letters, setLetters] = useState(0)
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setLetters((current) => {
+        if (current >= totalLength) {
+          window.clearInterval(timer)
+          return current
+        }
+        return current + 1
+      })
+    }, 85)
+    return () => window.clearInterval(timer)
+  }, [totalLength])
+  return <h1 aria-label={`${firstName} ${lastName}`}><span>{firstName.slice(0, Math.min(letters, firstName.length))}</span><br /><em>{lastName.slice(0, Math.max(0, letters - firstName.length))}</em><i className="typing-cursor" aria-hidden="true" /></h1>
+}
+
 function Hero() {
-  return <section className="hero page-shell" id="top"><div className="hero-copy"><p className="hello">Hello, I am</p><h1>Abdelrahman<br /><em>Sabry</em></h1><p className="hero-role"><span>Front-end</span> Engineer <i>/</i> Data-minded builder</p><p className="hero-intro">I build clear, responsive interfaces for people who need digital work to feel simple, useful, and considered.</p><div className="hero-actions"><a className="button" href="#work">Explore my work</a><a className="button button-dark" href="#contact"><FiMessageCircle /> Let’s talk</a><a className="button button-quiet" href="/documents/Abdelrahman-Sabry-CV.pdf" download><FiDownload /> Download CV</a></div></div><div className="hero-aside"><StackOrbit /><p className="hero-note">React · TypeScript · UI systems</p></div><span className="hero-index">01 / 08</span></section>
+  return <section className="hero page-shell" id="top"><div className="hero-copy"><p className="hello">Hello, I am</p><TypedName /><p className="hero-role"><span>Front-end</span> Engineer <i>/</i> Data-minded builder</p><p className="hero-intro">I build clear, responsive interfaces for people who need digital work to feel simple, useful, and considered.</p><div className="hero-actions"><a className="button" href="#work">Explore my work</a><a className="button button-dark" href="#contact"><FiMessageCircle /> Let’s talk</a><a className="button button-quiet" href="/documents/Abdelrahman-Sabry-CV.pdf" download><FiDownload /> Download CV</a></div></div><div className="hero-aside"><StackOrbit /><p className="hero-note">React · TypeScript · UI systems</p></div><span className="hero-index">01 / 06</span></section>
 }
 
 function About() {
-  return <section className="about-section page-shell section-space" id="about"><SectionLabel index="01">About the engineer</SectionLabel><div className="about-grid"><h2>Interfaces that<br /><em>make things clear.</em></h2><div className="about-copy"><p>I’m Abdelrahman Sabry, a Computer Science graduate and front-end engineer in training. I use React, TypeScript, and modern web tools to turn ideas into responsive experiences with structure behind the polish.</p><p>I have C1-level English and practical experience working as an English teacher’s assistant, supporting lessons and post-editing educational work. Alongside that, I’m training in data engineering through DEPI.</p></div></div><div className="facts-grid"><div><span>EDUCATION</span><strong>B.Sc. Computer Science & Information Systems<small>El Shorouk Academy · 2022—2026</small></strong></div><div><span>CORE FOCUS</span><strong>Front-end engineering<small>React · TypeScript · Responsive UI</small></strong></div><div><span>ENGLISH</span><strong>C1 proficiency<small>Teacher assistant · Educational post-editing</small></strong></div></div></section>
+  return <section className="about-section page-shell section-space" id="about"><SectionLabel index="01">About the engineer</SectionLabel><Reveal className="about-grid"><h2>Interfaces that<br /><em>make things clear.</em></h2><div className="about-copy"><p>I’m Abdelrahman Sabry, a Computer Science graduate and front-end engineer in training. I use React, TypeScript, and modern web tools to turn ideas into responsive experiences with structure behind the polish.</p><p>I have C1-level English and practical experience working as an English teacher’s assistant, supporting lessons and post-editing educational work. Alongside that, I’m training in data engineering through DEPI.</p></div></Reveal><Reveal className="facts-grid" delay={100}><div><span>EDUCATION</span><strong>B.Sc. Computer Science & Information Systems<small>El Shorouk Academy · 2022—2026</small></strong></div><div><span>CORE FOCUS</span><strong>Front-end engineering<small>React · TypeScript · Responsive UI</small></strong></div><div><span>ENGLISH</span><strong>C1 proficiency<small>Teacher assistant · Educational post-editing</small></strong></div></Reveal></section>
 }
 
 function ProjectCard({ project }: { project: Project }) {
@@ -97,15 +138,15 @@ function ProjectCard({ project }: { project: Project }) {
 }
 
 function Work() {
-  return <section className="work-section page-shell section-space" id="work"><div className="section-head"><SectionLabel index="02">Selected work</SectionLabel><span className="section-aside">02 live builds</span></div><div className="projects-grid">{projects.map((project) => <ProjectCard key={project.number} project={project} />)}</div></section>
+  return <section className="work-section page-shell section-space" id="work"><div className="section-head"><SectionLabel index="02">Selected work</SectionLabel><span className="section-aside">02 live builds</span></div><Reveal className="projects-grid">{projects.map((project, index) => <Reveal key={project.number} delay={index * 100}><ProjectCard project={project} /></Reveal>)}</Reveal></section>
 }
 
 function Tools() {
-  return <section className="tools-section section-space" id="tools"><div className="page-shell"><SectionLabel index="03">Stack & tools</SectionLabel><div className="tools-intro"><h2>Tools that<br /><em>move the work.</em></h2><p>Real tools, real practice. This is the stack I use to design, build, organize, and present digital work.</p></div><div className="tools-marquee" aria-label="Technologies I use"><div className="tools-track">{[...tools, ...tools].map(({ name, Icon }, index) => <div className="marquee-tool" key={`${name}-${index}`}><Icon /><span>{name}</span></div>)}</div></div><div className="tools-grid">{tools.map(({ name, category, Icon }) => <div className="tool-card" key={name}><Icon className="tool-logo" /><div><strong>{name}</strong><span>{category}</span></div></div>)}</div></div></section>
+  return <section className="tools-section section-space" id="tools"><div className="page-shell"><SectionLabel index="03">Stack & tools</SectionLabel><Reveal className="tools-intro"><h2>Tools that<br /><em>move the work.</em></h2><p>Real tools, real practice. This is the stack I use to design, build, organize, and present digital work.</p></Reveal><div className="tools-marquee" aria-label="Technologies I use"><div className="tools-track">{[...tools, ...tools].map(({ name, Icon }, index) => <div className="marquee-tool" key={`${name}-${index}`}><Icon /><span>{name}</span></div>)}</div></div><Reveal className="tools-grid">{tools.map(({ name, category, Icon }) => <div className="tool-card" key={name}><Icon className="tool-logo" /><div><strong>{name}</strong><span>{category}</span></div></div>)}</Reveal></div></section>
 }
 
 function Services() {
-  return <section className="services-section page-shell section-space" id="services"><SectionLabel index="04">What I can help with</SectionLabel><div className="services-intro"><h2>From first idea<br /><em>to finished detail.</em></h2><p>Choose the kind of support you need and take it straight to the conversation. Every service starts with understanding the real problem.</p></div><div className="services-list">{services.map(({ title, text, Icon }) => <a className="service-row" href="#contact" key={title}><Icon className="service-icon" /><div><h3>{title}</h3><span>DISCUSS THIS SERVICE</span></div><p>{text}</p></a>)}</div></section>
+  return <section className="services-section page-shell section-space" id="services"><SectionLabel index="04">What I can help with</SectionLabel><Reveal className="services-intro"><h2>From first idea<br /><em>to finished detail.</em></h2><p>Choose the kind of support you need and take it straight to the conversation. Every service starts with understanding the real problem.</p></Reveal><Reveal className="services-list" delay={100}>{services.map(({ title, text, Icon }) => <a className="service-row" href="#contact" key={title}><Icon className="service-icon" /><div><h3>{title}</h3><span>DISCUSS THIS SERVICE</span></div><p>{text}</p></a>)}</Reveal></section>
 }
 
 function Documents() {
@@ -117,11 +158,11 @@ function EditorialWork() {
 }
 
 function Resume() {
-  return <section className="resume-section page-shell section-space" id="resume"><div className="resume-head"><SectionLabel index="07">One-page resume</SectionLabel><a className="resume-download" href="/documents/Abdelrahman-Sabry-CV.pdf" download><FiDownload /> Download CV</a></div><div className="resume-layout"><div className="resume-intro"><h2>Front-end engineer<br /><em>with a data mindset.</em></h2><p>Computer Science graduate building responsive interfaces, structured workflows, and useful digital systems.</p></div><div className="resume-content"><div className="resume-block"><span>PROFILE</span><p>Front-end developer with a foundation in React, TypeScript, JavaScript, Bootstrap, and responsive UI. C1-level English with practical experience supporting an English teacher and post-editing educational content.</p></div><div className="resume-block"><span>EXPERIENCE</span><div><strong>Microsoft Data Engineer Track Trainee</strong><small>Digital Egypt Pioneers Initiative · 2026—Present</small><p>Training in database administration, data pipelines, data cleaning, and modern processing workflows.</p></div></div><div className="resume-block"><span>EDUCATION</span><div><strong>B.Sc. Computer Science & Information Systems</strong><small>El Shorouk Academy · 2022—2026</small></div></div><div className="resume-block"><span>CAPABILITIES</span><div className="resume-tags">{['React', 'TypeScript', 'JavaScript', 'Bootstrap', 'Responsive UI', 'Data cleaning', 'Excel', 'PowerPoint', 'Technical documentation'].map((item) => <span key={item}>{item}</span>)}</div></div></div></div></section>
+  return <section className="resume-section page-shell section-space" id="resume"><div className="resume-head"><SectionLabel index="05">One-page resume</SectionLabel><a className="resume-download" href="/documents/Abdelrahman-Sabry-CV.pdf" download><FiDownload /> Download CV</a></div><Reveal className="resume-layout"><div className="resume-intro"><h2>Front-end engineer<br /><em>with a data mindset.</em></h2><p>Computer Science graduate building responsive interfaces, structured workflows, and useful digital systems.</p></div><div className="resume-content"><div className="resume-block"><span>PROFILE</span><p>Front-end developer with a foundation in React, TypeScript, JavaScript, Bootstrap, and responsive UI. C1-level English with practical experience supporting an English teacher and post-editing educational content.</p></div><div className="resume-block"><span>EXPERIENCE</span><div><strong>Microsoft Data Engineer Track Trainee</strong><small>Digital Egypt Pioneers Initiative · 2026—Present</small><p>Training in database administration, data pipelines, data cleaning, and modern processing workflows.</p></div></div><div className="resume-block"><span>EDUCATION</span><div><strong>B.Sc. Computer Science & Information Systems</strong><small>El Shorouk Academy · 2022—2026</small></div></div><div className="resume-block"><span>CAPABILITIES</span><div className="resume-tags">{['React', 'TypeScript', 'JavaScript', 'Bootstrap', 'Responsive UI', 'Data cleaning', 'Excel', 'PowerPoint', 'Technical documentation'].map((item) => <span key={item}>{item}</span>)}</div></div></div></Reveal></section>
 }
 
 function Contact() {
-  return <section className="contact-section page-shell section-space" id="contact"><div className="contact-panel"><div><SectionLabel index="08">Start a conversation</SectionLabel><h2>Have something<br /><em>worth building?</em></h2><p>Send the idea, the question, or the messy first version. I’m open to full-time roles, freelance projects, and good collaborations.</p></div><div className="contact-details"><a className="contact-email" href="mailto:mobodymo6@gmail.com"><FaEnvelope /> mobodymo6@gmail.com</a><a href="https://wa.me/201553258929" target="_blank" rel="noreferrer"><FaWhatsapp /><span>WhatsApp</span><strong>015 5325 8929</strong></a><a href="https://www.linkedin.com/in/abdelrahman-sabry-b36500275/" target="_blank" rel="noreferrer"><FaLinkedinIn /><span>LinkedIn</span><strong>Connect with me</strong></a></div></div></section>
+  return <section className="contact-section page-shell section-space" id="contact"><Reveal className="contact-panel"><div><SectionLabel index="06">Start a conversation</SectionLabel><h2>Have something<br /><em>worth building?</em></h2><p>Send the idea, the question, or the messy first version. I’m open to full-time roles, freelance projects, and good collaborations.</p></div><div className="contact-details"><a className="contact-email" href="mailto:mobodymo6@gmail.com"><FaEnvelope /> mobodymo6@gmail.com</a><a href="https://wa.me/201553258929" target="_blank" rel="noreferrer"><FaWhatsapp /><span>WhatsApp</span><strong>015 5325 8929</strong></a><a href="https://www.linkedin.com/in/abdelrahman-sabry-b36500275/" target="_blank" rel="noreferrer"><FaLinkedinIn /><span>LinkedIn</span><strong>Connect with me</strong></a></div></Reveal></section>
 }
 
 function Footer() {
@@ -131,7 +172,7 @@ function Footer() {
 function App() {
   const [light, setLight] = useState(() => localStorage.getItem('theme') === 'light')
   useEffect(() => { document.body.classList.toggle('light-mode', light); localStorage.setItem('theme', light ? 'light' : 'dark') }, [light])
-  return <div className={light ? 'app theme-light' : 'app'}><Nav light={light} onTheme={() => setLight(!light)} /><main><Hero /><div className="marquee"><div className="marquee-track">FRONT-END ENGINEERING <b>✳</b> REACT + TYPESCRIPT <b>✳</b> USEFUL DIGITAL SYSTEMS <b>✳</b> FRONT-END ENGINEERING <b>✳</b> REACT + TYPESCRIPT <b>✳</b> USEFUL DIGITAL SYSTEMS <b>✳</b></div></div><About /><Work /><Tools /><Services /><Documents /><EditorialWork /><Resume /><Contact /></main><Footer /></div>
+  return <div className={light ? 'app theme-light' : 'app'}><Nav light={light} onTheme={() => setLight(!light)} /><main><Hero /><div className="marquee"><div className="marquee-track">FRONT-END ENGINEERING <b>✳</b> REACT + TYPESCRIPT <b>✳</b> USEFUL DIGITAL SYSTEMS <b>✳</b> FRONT-END ENGINEERING <b>✳</b> REACT + TYPESCRIPT <b>✳</b> USEFUL DIGITAL SYSTEMS <b>✳</b></div></div><About /><Work /><Tools /><Services /><Resume /><Contact /></main><Footer /></div>
 }
 
 export default App
