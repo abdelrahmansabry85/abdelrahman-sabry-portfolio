@@ -69,6 +69,7 @@ const certifications = [
   { title: 'EF SET English Certificate', issuer: 'EF SET', date: 'Issued June 2026' },
   { title: 'Responsive Web Design', issuer: 'freeCodeCamp', date: 'Issued July 2025' },
   { title: 'Web development', issuer: 'SoloLearn', date: 'Certificate listed on LinkedIn' },
+  { title: 'Route course certificate', issuer: 'Route', date: 'Certificate listed on LinkedIn' },
 ]
 
 function Brand() {
@@ -158,7 +159,7 @@ function Services() {
 }
 
 function Certifications() {
-  return <section className="certifications-section page-shell section-space" id="certifications"><div className="section-head"><SectionLabel index="05">Certifications</SectionLabel><span className="section-aside">04 verified entries</span></div><Reveal className="certifications-grid">{certifications.map(({ title, issuer, date }, index) => <a className="certification-card" href={linkedinCertificationsUrl} target="_blank" rel="noreferrer" key={title} style={{ '--cert-delay': `${index * 70}ms` } as CSSProperties}><span className="certification-icon"><FiAward /></span><span className="certification-issuer">{issuer}</span><h3>{title}</h3><span className="certification-date">{date}</span><span className="certification-link">VIEW CREDENTIAL ON LINKEDIN</span></a>)}</Reveal></section>
+  return <section className="certifications-section page-shell section-space" id="certifications"><div className="section-head"><SectionLabel index="05">Certifications</SectionLabel><span className="section-aside">05 verified entries</span></div><Reveal className="certifications-grid">{certifications.map(({ title, issuer, date }, index) => <a className="certification-card" href={linkedinCertificationsUrl} target="_blank" rel="noreferrer" key={title} style={{ '--cert-delay': `${index * 70}ms` } as CSSProperties}><span className="certification-icon"><FiAward /></span><span className="certification-issuer">{issuer}</span><h3>{title}</h3><span className="certification-date">{date}</span><span className="certification-link">VIEW CREDENTIAL ON LINKEDIN</span></a>)}</Reveal></section>
 }
 
 function Documents() {
