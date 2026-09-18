@@ -22,24 +22,26 @@ The visual direction is dark and editorial, with a light-mode alternative, an an
 ### Project screenshots
 
 <p>
-  <img src="./public/medidash.png" alt="MediDash landing page" width="49%" />
-  <img src="./public/mostafa-teacher-hub.png" alt="Mostafa Teacher Hub landing page" width="49%" />
+  <img src="./public/medidash.webp" alt="MediDash landing page" width="49%" />
+  <img src="./public/mostafa-teacher-hub.webp" alt="Mostafa Teacher Hub landing page" width="49%" />
 </p>
 
-Each project includes a case-study expansion with the role, intended outcome, project context, and technology details.
+Each project includes a case-study expansion with the problem, role, design decisions, outcome, technology details, and additional real screenshots.
 
 ## What is included
 
 - About section focused on front-end engineering and practical English-education support
 - Selected work with real landing-page screenshots and live links
 - Animated stack marquee and icon-based tools grid
-- Services for front-end engineering, data cleaning, technical content, presentations, and documentation
+- Services for front-end engineering, raw spreadsheet cleanup, technical content, and UI systems handoff
 - Compact certifications section linking to the public LinkedIn certifications page
 - Downloadable CV, with presentation and documentation assets preserved for a future documents page
 - One-page resume section with a branded CV download
-- Email, WhatsApp, LinkedIn, and X contact links
+- Email, WhatsApp, LinkedIn, X, and GitHub contact links
 - Dark and light themes with persisted preference
 - Responsive layout for mobile, tablet, and desktop
+- Open Graph and Twitter sharing metadata, canonical URL, sitemap, robots.txt, and profile structured data
+- Lazy-loaded WebP project screenshots; large documents remain downloadable without loading on the homepage
 
 ## Technology
 
@@ -93,7 +95,8 @@ src/
 public/
   documents/     CV, MediDash decks, and technical documentation
   editorial/     Additional presentation PDFs and cover thumbnails
-  *.png          Real project landing-page screenshots
+  *.webp         Optimized real project landing-page screenshots
+  *.png          Original screenshot source assets
 ```
 
 ## Documents
@@ -113,6 +116,7 @@ The repository preserves the supplied work samples as public assets for the plan
 - WhatsApp: [Message on WhatsApp](https://wa.me/201553258929)
 - LinkedIn: [Abdelrahman Sabry](https://www.linkedin.com/in/abdelrahman-sabry-b36500275/)
 - X: [@abosabrynbo](https://x.com/abosabrynbo)
+- GitHub: [abdelrahman-sabry-portfolio](https://github.com/abdelrahmansabry85/abdelrahman-sabry-portfolio)
 
 ## License
 

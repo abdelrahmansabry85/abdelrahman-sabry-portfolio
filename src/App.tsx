@@ -1,17 +1,19 @@
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
-import { FiAperture, FiAward, FiBookOpen, FiCode, FiCpu, FiDownload, FiEdit3, FiFileText, FiLayers, FiMessageCircle, FiMonitor, FiMoon, FiSun } from 'react-icons/fi'
-import { FaEnvelope, FaFileExcel, FaFilePowerpoint, FaFileWord, FaLinkedinIn, FaWhatsapp, FaXTwitter } from 'react-icons/fa6'
+import { FiAward, FiCode, FiCpu, FiDownload, FiEdit3, FiFileText, FiLayers, FiMessageCircle, FiMonitor, FiMoon, FiSun } from 'react-icons/fi'
+import { FaEnvelope, FaFileExcel, FaFilePowerpoint, FaFileWord, FaGithub, FaLinkedinIn, FaWhatsapp, FaXTwitter } from 'react-icons/fa6'
 import { SiBootstrap, SiCss, SiFigma, SiGithub, SiHtml5, SiJavascript, SiPostgresql, SiReact, SiTypescript, SiVite } from 'react-icons/si'
 import type { IconType } from 'react-icons'
 
-type Project = { number: string; label: string; title: string; description: string; stack: string[]; url: string; thumbnail: string; role: string; outcome: string; details: string }
+type Project = { number: string; label: string; title: string; description: string; stack: string[]; url: string; thumbnail: string; screenshots: string[]; role: string; problem: string; decisions: string; outcome: string; details: string }
 
 const projects: Project[] = [
   {
     number: '01', label: 'HEALTHCARE / PLATFORM', title: 'MediDash',
     description: 'A digital healthcare platform that brings patient care into one clear flow: doctor discovery, bookings, records, and an AI assistant for support.',
     stack: ['React', 'TypeScript', 'Bootstrap', 'SQL', 'AI chatbot'], url: 'https://la-phi.vercel.app/',
-    thumbnail: '/medidash.png',
+    thumbnail: '/medidash.webp', screenshots: ['/medidash.webp', '/medidash-full.webp'],
+    problem: 'Healthcare journeys can become crowded when doctor discovery, booking, records, and support compete for attention.',
+    decisions: 'Grouped the experience around the next patient action, used familiar dashboard patterns, and kept the AI assistant as support rather than the primary interface.',
     role: 'Front-end development · Product structure',
     outcome: 'A clearer patient journey from finding a doctor to taking the next action.',
     details: 'I shaped the interface around the real healthcare journey: discovery, booking, records, and support. The result is a focused system that keeps complex information readable and the next step obvious.',
@@ -20,7 +22,9 @@ const projects: Project[] = [
     number: '02', label: 'EDUCATION / INFORMATION SITE', title: 'Mostafa Teacher Hub',
     description: 'A focused website for finding the teacher’s schedule, class address, and timing, with an AI quiz bot that makes revision more interactive.',
     stack: ['TypeScript', 'JavaScript', 'Bootstrap', 'AI quiz bot'], url: 'https://mrmostafamashaly.vercel.app/',
-    thumbnail: '/mostafa-teacher-hub.png',
+    thumbnail: '/mostafa-teacher-hub.webp', screenshots: ['/mostafa-teacher-hub.webp', '/mostafa-teacher-hub-full.webp'],
+    problem: 'Students need the teacher’s address, schedule, and timing immediately, before they explore anything else.',
+    decisions: 'Put practical information first, kept the Arabic-first layout direct, and separated the AI quiz assistant from the essential location and timing details.',
     role: 'Front-end development · Information design',
     outcome: 'A direct Arabic-first landing page for schedule, location, contact, and revision support.',
     details: 'I organized the teacher’s essential information into a fast, readable homepage. The AI quiz assistant adds an interactive revision layer without taking attention away from the practical details students need first.',
@@ -39,9 +43,9 @@ const tools: Array<{ name: string; category: string; Icon: IconType }> = [
 
 const services: Array<{ title: string; text: string; Icon: IconType }> = [
   { title: 'Front-end engineering', text: 'Responsive websites and web applications built with React, TypeScript, clean components, and a sharp eye for interaction.', Icon: FiCode },
-  { title: 'Data cleaning & structure', text: 'Messy spreadsheets and raw information turned into clear, consistent, usable data with careful validation.', Icon: FiLayers },
+  { title: 'Data cleaning & structure', text: 'Raw spreadsheet data turned into clear, consistent, usable information with careful validation.', Icon: FiLayers },
   { title: 'Technical content', text: 'Arabic ↔ English translation, proofreading, and post-editing that keeps technical meaning accurate and natural.', Icon: FiFileText },
-  { title: 'Presentations & docs', text: 'Clear PowerPoint decks and structured documentation that help people understand the work and act on it.', Icon: FiBookOpen },
+  { title: 'UI systems & handoff', text: 'Reusable interface patterns, responsive states, and clear component handoff that keep front-end work consistent.', Icon: FiMonitor },
 ]
 
 const documents: Array<{ type: string; title: string; text: string; status: string; href?: string; secondaryHref?: string; secondaryStatus?: string; Icon: IconType }> = [
@@ -72,8 +76,12 @@ const certifications = [
   { title: 'Route course certificate', issuer: 'Route', date: 'Certificate listed on LinkedIn' },
 ]
 
+function BrandMark() {
+  return <svg className="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M8 50 23 11h6l15 39M14 35h24" /><path d="M54 16c-4-5-11-6-16-3-5 3-4 9 1 11l8 3c7 3 8 9 4 15-4 7-14 9-21 4" /></svg>
+}
+
 function Brand() {
-  return <a className="brand" href="#top" aria-label="Abdelrahman Sabry home"><span className="brand-sigil"><FiAperture /></span><span className="brand-name">ABDELRAHMAN<br /><b>SABRY</b></span></a>
+  return <a className="brand" href="#top" aria-label="Abdelrahman Sabry home"><span className="brand-sigil"><BrandMark /></span><span className="brand-name">ABDELRAHMAN<br /><b>SABRY</b></span></a>
 }
 
 function Nav({ light, onTheme }: { light: boolean; onTheme: () => void }) {
@@ -143,7 +151,28 @@ function About() {
 function ProjectCard({ project }: { project: Project }) {
   const [failed, setFailed] = useState(false)
   const [expanded, setExpanded] = useState(false)
-  return <article className={`project-card ${project.number === '02' ? 'teacher-project' : ''}`}><a className="project-shot" href={project.url} target="_blank" rel="noreferrer" aria-label={`Open ${project.title} live website`}>{failed ? <div className="shot-unavailable"><FiMonitor /><span>LIVE SCREENSHOT<br />UNAVAILABLE</span></div> : <img src={project.thumbnail} alt={`${project.title} landing page screenshot`} onError={() => setFailed(true)} />}<span className="shot-badge">LIVE SCREENSHOT</span></a><div className="project-copy"><div className="project-head"><span className="project-number">{project.number}</span><div><span className="eyebrow">{project.label}</span><h3>{project.title}</h3></div></div><p>{project.description}</p><div className="project-foot"><div className="stack-list">{project.stack.map((item) => <span key={item}>{item}</span>)}</div><div className="project-actions"><a className="project-open" href={project.url} target="_blank" rel="noreferrer">View live project</a><button className="case-study-toggle" type="button" onClick={() => setExpanded(!expanded)} aria-expanded={expanded}>{expanded ? 'Close case study' : 'Read case study'}</button></div></div>{expanded && <div className="case-study-panel"><div><span>ROLE</span><strong>{project.role}</strong></div><div><span>OUTCOME</span><strong>{project.outcome}</strong></div><p>{project.details}</p><div className="case-study-tech"><span>TECHNOLOGY DETAILS</span><div className="stack-list">{project.stack.map((item) => <span key={item}>{item}</span>)}</div></div></div>}</div></article>
+  return (
+    <article className={`project-card ${project.number === '02' ? 'teacher-project' : ''}`}>
+      <a className="project-shot" href={project.url} target="_blank" rel="noreferrer" aria-label={`Open ${project.title} live website`}>
+        {failed ? <div className="shot-unavailable"><FiMonitor /><span>LIVE SCREENSHOT<br />UNAVAILABLE</span></div> : <img src={project.thumbnail} alt={`${project.title} landing page screenshot`} loading="lazy" decoding="async" onError={() => setFailed(true)} />}
+        <span className="shot-badge">LIVE SCREENSHOT</span>
+      </a>
+      <div className="project-copy">
+        <div className="project-head"><span className="project-number">{project.number}</span><div><span className="eyebrow">{project.label}</span><h3>{project.title}</h3></div></div>
+        <p>{project.description}</p>
+        <div className="project-foot"><div className="stack-list">{project.stack.map((item) => <span key={item}>{item}</span>)}</div><div className="project-actions"><a className="project-open" href={project.url} target="_blank" rel="noreferrer">View live project</a><button className="case-study-toggle" type="button" onClick={() => setExpanded(!expanded)} aria-expanded={expanded}>{expanded ? 'Close case study' : 'Read case study'}</button></div></div>
+        {expanded && <div className="case-study-panel">
+          <div className="case-study-wide"><span>PROBLEM</span><p>{project.problem}</p></div>
+          <div><span>ROLE</span><strong>{project.role}</strong></div>
+          <div><span>OUTCOME</span><strong>{project.outcome}</strong></div>
+          <div className="case-study-wide"><span>DECISIONS</span><p>{project.decisions}</p></div>
+          <div className="case-study-wide"><span>DETAILS</span><p>{project.details}</p></div>
+          <div className="case-study-tech"><span>TECHNOLOGY DETAILS</span><div className="stack-list">{project.stack.map((item) => <span key={item}>{item}</span>)}</div></div>
+          <div className="case-study-gallery" aria-label={`${project.title} screenshots`}>{project.screenshots.map((screenshot, index) => <img key={screenshot} src={screenshot} alt={`${project.title} project screenshot ${index + 1}`} loading="lazy" decoding="async" />)}</div>
+        </div>}
+      </div>
+    </article>
+  )
 }
 
 function Work() {
@@ -179,7 +208,7 @@ function Contact() {
 }
 
 function Footer() {
-  return <footer className="site-footer"><div className="page-shell"><div className="footer-top"><Brand /><span>Front-end engineer<br />with a data mindset.</span><div className="footer-links" aria-label="Social and contact links"><a className="footer-social-link" href="mailto:mobodymo6@gmail.com" aria-label="Email Abdelrahman" title="Email"><FaEnvelope /></a><a className="footer-social-link" href="https://wa.me/201553258929" target="_blank" rel="noreferrer" aria-label="Message Abdelrahman on WhatsApp" title="WhatsApp"><FaWhatsapp /></a><a className="footer-social-link" href="https://www.linkedin.com/in/abdelrahman-sabry-b36500275/" target="_blank" rel="noreferrer" aria-label="Abdelrahman on LinkedIn" title="LinkedIn"><FaLinkedinIn /></a><a className="footer-social-link" href="https://x.com/abosabrynbo?s=11" target="_blank" rel="noreferrer" aria-label="Abdelrahman on X" title="X"><FaXTwitter /></a></div></div><div className="footer-bottom"><span>© 2026 Abdelrahman Sabry</span><a href="#top">Back to top</a><span>Built with React + TypeScript</span></div></div></footer>
+  return <footer className="site-footer"><div className="page-shell"><div className="footer-top"><Brand /><span>Front-end engineer<br />with a data mindset.</span><div className="footer-links" aria-label="Social and contact links"><a className="footer-social-link" href="mailto:mobodymo6@gmail.com" aria-label="Email Abdelrahman" title="Email"><FaEnvelope /></a><a className="footer-social-link" href="https://wa.me/201553258929" target="_blank" rel="noreferrer" aria-label="Message Abdelrahman on WhatsApp" title="WhatsApp"><FaWhatsapp /></a><a className="footer-social-link" href="https://www.linkedin.com/in/abdelrahman-sabry-b36500275/" target="_blank" rel="noreferrer" aria-label="Abdelrahman on LinkedIn" title="LinkedIn"><FaLinkedinIn /></a><a className="footer-social-link" href="https://x.com/abosabrynbo?s=11" target="_blank" rel="noreferrer" aria-label="Abdelrahman on X" title="X"><FaXTwitter /></a><a className="footer-social-link" href="https://github.com/abdelrahmansabry85/abdelrahman-sabry-portfolio" target="_blank" rel="noreferrer" aria-label="Abdelrahman on GitHub" title="GitHub"><FaGithub /></a></div></div><div className="footer-bottom"><span>© 2026 Abdelrahman Sabry</span><a href="#top">Back to top</a><span>Built with React + TypeScript</span></div></div></footer>
 }
 
 function App() {
