@@ -35,6 +35,17 @@ const projects: Project[] = [
     outcome: 'A direct Arabic-first landing page for schedule, location, contact, and revision support.',
     details: 'I organized the teacher’s essential information into a fast, readable homepage. The AI quiz assistant adds an interactive revision layer without taking attention away from the practical details students need first.',
   },
+  {
+    number: '03', label: 'OPEN SOURCE / INTERACTIVE EXPERIENCE', title: 'Birthday Website Template',
+    description: 'A cinematic, editorial birthday experience — an open-source, reusable template that ships empty and private by design, so anyone can personalize it in minutes.',
+    stack: ['React 19', 'TypeScript', 'Tailwind CSS 4', 'Motion', 'GitHub Pages'], url: 'https://abdelrahmansabry85.github.io/birthday-website-template/',
+    thumbnail: '/birthday-template.svg', screenshots: ['/birthday-template.svg'],
+    problem: 'Personal celebration sites usually hardcode names, photos, and messages — making them impossible to reuse or share safely.',
+    decisions: 'Designed every personal field as an empty placeholder: a one-line name config drives the whole site, content files are marked EDIT ME, and a base-aware asset loader keeps images and audio working on any deploy path.',
+    role: 'Design · Front-end development · Open-source release',
+    outcome: 'A public GitHub template with automated GitHub Pages deploys, bilingual (Arabic/English) content, and zero personal data in the repo.',
+    details: 'The experience flows through five phases — intro, photo journey, birthday moment, personal letter, and finale — with synced music, floating balloons, and a bilingual letter toggle. Everything personal ships empty: users edit two files (config + letter) to make it theirs. CI/CD via GitHub Actions builds with the correct base path for project-site hosting.',
+  },
 ]
 
 const tools: Array<{ name: string; category: string; Icon: IconType }> = [
@@ -169,7 +180,7 @@ function ProjectCard({ project }: { project: Project }) {
 }
 
 function Work() {
-  return <section className="work-section page-shell section-space" id="work"><div className="section-head"><SectionLabel index="02">Selected work</SectionLabel><span className="section-aside">02 live builds</span></div><Reveal className="projects-grid">{projects.map((project, index) => <Reveal key={project.number} delay={index * 100}><ProjectCard project={project} /></Reveal>)}</Reveal></section>
+  return <section className="work-section page-shell section-space" id="work"><div className="section-head"><SectionLabel index="02">Selected work</SectionLabel><span className="section-aside">03 live builds</span></div><Reveal className="projects-grid">{projects.map((project, index) => <Reveal key={project.number} delay={index * 100}><ProjectCard project={project} /></Reveal>)}</Reveal></section>
 }
 
 function Tools() {
