@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://abdelrahman-sabry-portfolio.vercel.app/sitemap.xml
