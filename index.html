@@ -23,6 +23,11 @@
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Abdelrahman Sabry","jobTitle":"Front-end Engineer","url":"https://abdelrahman-sabry-portfolio.vercel.app/","sameAs":["https://github.com/abdelrahmansabry85","https://www.linkedin.com/in/abdelrahman-sabry-b36500275/","https://x.com/abosabrynbo"]}</script>
   </head>
   <body>
+    <script>
+      try {
+        if (localStorage.getItem('theme') === 'light') document.body.classList.add('light-mode')
+      } catch (e) {}
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
-import { FiAward, FiCode, FiCpu, FiDownload, FiEdit3, FiFileText, FiLayers, FiMessageCircle, FiMonitor, FiMoon, FiSun } from 'react-icons/fi'
+import { FiAward, FiCode, FiCpu, FiDownload, FiFileText, FiLayers, FiMessageCircle, FiMonitor, FiMoon, FiSun } from 'react-icons/fi'
 import { FaEnvelope, FaFileExcel, FaFilePowerpoint, FaFileWord, FaGithub, FaLinkedinIn, FaWhatsapp, FaXTwitter } from 'react-icons/fa6'
 import { SiBootstrap, SiCss, SiFigma, SiGithub, SiHtml5, SiJavascript, SiPostgresql, SiReact, SiTypescript, SiVite } from 'react-icons/si'
 import type { IconType } from 'react-icons'
@@ -54,25 +54,6 @@ const services: Array<{ title: string; text: string; Icon: IconType }> = [
   { title: 'UI systems & handoff', text: 'Reusable interface patterns, responsive states, and clear component handoff that keep front-end work consistent.', Icon: FiMonitor },
 ]
 
-const documents: Array<{ type: string; title: string; text: string; status: string; href?: string; secondaryHref?: string; secondaryStatus?: string; Icon: IconType }> = [
-  { type: 'POWERPOINT / PRESENTATION', title: 'MediDash presentation', text: 'The final-semester deck documenting the Online Medical System concept, structure, and presentation decisions.', status: 'DOWNLOAD FINAL DECK', href: '/documents/MediDash-Presentation-Final.pptx', secondaryHref: '/documents/MediDash-Presentation-First-Semester.pptx', secondaryStatus: 'DOWNLOAD FIRST DECK', Icon: FiMonitor },
-  { type: 'DOCUMENTATION / TECHNICAL', title: 'MediDash documentation', text: 'The project book covering the Online Medical System as a documented product and technical project.', status: 'DOWNLOAD DOCUMENTATION', href: '/documents/MediDash-Technical-Documentation.pdf', Icon: FiFileText },
-  { type: 'POST-EDITING / EDUCATION', title: 'Educational post-editing', text: 'A dedicated slot for a real before-and-after sample from your English teaching and post-editing work.', status: 'SAMPLE STILL NEEDED', Icon: FiEdit3 },
-]
-
-const editorialPresentations = [
-  {
-    type: 'EDITORIAL PRESENTATION', title: 'Messi and His Impact on Argentina',
-    text: 'A visual report exploring Messi’s relationship with Argentina through a strong editorial layout and a structured narrative.',
-    href: '/editorial/Messi-and-His-Impact-on-Argentina.pdf', thumbnail: '/editorial/messi-and-his-impact-on-argentina.png',
-  },
-  {
-    type: 'ARABIC PRESENTATION', title: 'AI Systems & the n8n Tool',
-    text: 'An Arabic presentation introducing AI systems and n8n through a clear, visual, student-friendly structure.',
-    href: '/editorial/Arabic-Editorial-Presentation.pdf', thumbnail: '/editorial/arabic-editorial-presentation.png',
-  },
-]
-
 const linkedinCertificationsUrl = 'https://www.linkedin.com/in/abdelrahman-sabry-b36500275/details/certifications/'
 const certifications = [
   { title: 'Prompt Engineering', issuer: 'Dubai Future Foundation', date: 'Issued July 2026' },
@@ -92,6 +73,12 @@ function Brand() {
 
 function Nav({ light, onTheme }: { light: boolean; onTheme: () => void }) {
   const [open, setOpen] = useState(false)
+  useEffect(() => {
+    if (!open) return
+    const onEscape = (event: KeyboardEvent) => { if (event.key === 'Escape') setOpen(false) }
+    window.addEventListener('keydown', onEscape)
+    return () => window.removeEventListener('keydown', onEscape)
+  }, [open])
   const links = [['about', 'About'], ['work', 'Work'], ['tools', 'Tools'], ['services', 'Services'], ['certifications', 'Certifications'], ['resume', 'Resume'], ['contact', 'Contact']]
   return <header className="site-header"><div className="nav-shell"><Brand /><button className="mobile-toggle" onClick={() => setOpen(!open)} aria-expanded={open} aria-label="Toggle navigation"><span /><span /></button><nav className={open ? 'site-nav is-open' : 'site-nav'}>{links.map(([id, label], index) => <a key={id} href={`#${id}`} onClick={() => setOpen(false)}><span>0{index + 1}</span>{label}</a>)}</nav><button className="theme-toggle" onClick={onTheme} aria-label={light ? 'Switch to dark mode' : 'Switch to light mode'}>{light ? <FiMoon /> : <FiSun />}<span>{light ? 'DARK' : 'LIGHT'}</span></button></div></header>
 }
@@ -212,7 +199,7 @@ function Footer() {
 function App() {
   const [light, setLight] = useState(() => localStorage.getItem('theme') === 'light')
   useEffect(() => { document.body.classList.toggle('light-mode', light); localStorage.setItem('theme', light ? 'light' : 'dark') }, [light])
-  return <div className={light ? 'app theme-light' : 'app'}><Nav light={light} onTheme={() => setLight(!light)} /><main><Hero /><div className="marquee"><div className="marquee-track">FRONT-END ENGINEERING <b>✳</b> REACT + TYPESCRIPT <b>✳</b> USEFUL DIGITAL SYSTEMS <b>✳</b> FRONT-END ENGINEERING <b>✳</b> REACT + TYPESCRIPT <b>✳</b> USEFUL DIGITAL SYSTEMS <b>✳</b></div></div><About /><Work /><Tools /><Services /><Certifications /><Resume /><Contact /></main><Footer /></div>
+  return <div className={light ? 'app theme-light' : 'app'}><a className="skip-link" href="#about">Skip to content</a><Nav light={light} onTheme={() => setLight(!light)} /><main><Hero /><div className="marquee"><div className="marquee-track">FRONT-END ENGINEERING <b>✳</b> REACT + TYPESCRIPT <b>✳</b> USEFUL DIGITAL SYSTEMS <b>✳</b> FRONT-END ENGINEERING <b>✳</b> REACT + TYPESCRIPT <b>✳</b> USEFUL DIGITAL SYSTEMS <b>✳</b></div></div><About /><Work /><Tools /><Services /><Certifications /><Resume /><Contact /></main><Footer /></div>
 }
 
 export default App

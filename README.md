@@ -8,9 +8,9 @@
 
 ## Overview
 
-This is a one-page personal portfolio for Abdelrahman Sabry, a front-end engineer and data engineering trainee. The current homepage focuses on selected web projects, a practical toolset, services, a downloadable CV, and direct contact links. Presentation and documentation assets remain stored in the repository for a dedicated documents page later.
+This is a one-page personal portfolio for Abdelrahman Sabry, a front-end engineer and data engineering trainee. The homepage focuses on selected web projects, certifications, a practical toolset, services, a downloadable CV, and direct contact links.
 
-The visual direction is dark and editorial, with a light-mode alternative, an animated front-end stack orbit, real project screenshots, icon-based tool cards, smooth section transitions, and responsive layouts for mobile and desktop.
+The visual direction is dark and editorial, with a light-mode alternative, a typed hero name, an animated front-end stack orbit, real project screenshots, expandable case studies, and responsive layouts for mobile and desktop.
 
 ## Quick links
 
@@ -42,14 +42,13 @@ Each project includes a case-study expansion with the problem, role, design deci
 - Selected work with real landing-page screenshots, live links, and expandable case studies
 - Animated stack marquee and icon-based tools grid
 - Services for front-end engineering, raw spreadsheet cleanup, technical content, and UI systems handoff
-- Compact certifications section linking to the public LinkedIn certifications page
-- Downloadable CV, with presentation and documentation assets preserved for a future documents page
-- One-page resume section with a branded CV download
+- Certifications section linking to the public LinkedIn certifications page
+- Downloadable CV in the hero and resume sections
 - Email, WhatsApp, LinkedIn, X, and GitHub contact links
 - Dark and light themes with persisted preference
 - Responsive layout for mobile, tablet, and desktop
 - Open Graph and Twitter sharing metadata, canonical URL, sitemap, robots.txt, and profile structured data
-- Lazy-loaded WebP project screenshots; large documents remain downloadable without loading on the homepage
+- Lazy-loaded WebP project screenshots
 
 ## Technology
 
@@ -83,14 +82,15 @@ The build runs TypeScript checks before generating the production files in `dist
 
 ## Deployment
 
-The production site is deployed on Vercel and connected to the GitHub `main` branch. Every push to `main` triggers a new deployment automatically — no manual steps needed.
+The site deploys on Vercel, connected to this GitHub repository's `main` branch. Every push to `main` triggers a new production deployment automatically — no manual steps needed — and every pull request gets its own preview URL.
 
 To connect it yourself (if not already linked):
 
-1. Push the project to this GitHub repository.
-2. Go to [vercel.com/new](https://vercel.com/new) and import the `abdelrahman-sabry-portfolio` repository.
-3. Vercel detects Vite via [`vercel.json`](./vercel.json) (`npm run build`, output `dist/`) — just click **Deploy**.
-4. From then on, every push to `main` deploys automatically, and every pull request gets a preview URL.
+1. Go to [vercel.com/new](https://vercel.com/new) and import the `abdelrahman-sabry-portfolio` repository from GitHub.
+2. Vercel detects Vite via [`vercel.json`](./vercel.json) (`npm run build`, output `dist/`) — just click **Deploy**.
+3. Verify under **Settings → Git** that the connected repository is `abdelrahmansabry85/abdelrahman-sabry-portfolio` and the production branch is `main`.
+
+To connect an existing project instead: open it on Vercel → **Settings → Git** → connect the GitHub repository and select `main` as the production branch.
 
 ## Project files
 
@@ -100,22 +100,10 @@ src/
   styles.css     Responsive visual system, themes, and animations
   main.tsx       React entry point
 public/
-  documents/     CV, MediDash decks, and technical documentation
-  editorial/     Additional presentation PDFs and cover thumbnails
+  documents/     Downloadable CV (PDF)
   *.webp         Optimized real project landing-page screenshots
   *.png          Original screenshot source assets
 ```
-
-## Documents
-
-The repository preserves the supplied work samples as public assets for the planned documents page. They are not currently shown in the homepage navigation:
-
-- [Branded CV](./public/documents/Abdelrahman-Sabry-CV.pdf)
-- [MediDash final presentation](./public/documents/MediDash-Presentation-Final.pptx)
-- [MediDash first-semester presentation](./public/documents/MediDash-Presentation-First-Semester.pptx)
-- [MediDash technical documentation](./public/documents/MediDash-Technical-Documentation.pdf)
-- [Messi and His Impact on Argentina](./public/editorial/Messi-and-His-Impact-on-Argentina.pdf)
-- [AI Systems and the n8n Tool](./public/editorial/Arabic-Editorial-Presentation.pdf)
 
 ## Contact
 
