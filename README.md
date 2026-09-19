@@ -48,6 +48,7 @@ Each project includes a case-study expansion with the problem, role, design deci
 - Dark and light themes with persisted preference
 - Responsive layout for mobile, tablet, and desktop
 - Open Graph and Twitter sharing metadata, canonical URL, sitemap, robots.txt, and profile structured data
+- 1200×630 PNG social preview image
 - Lazy-loaded WebP project screenshots
 
 ## Technology
@@ -78,7 +79,7 @@ npm run build
 npm run preview
 ```
 
-The build runs TypeScript checks before generating the production files in `dist/`.
+The build runs TypeScript checks before generating the production files in `dist/`. Every push to `main` and every pull request also runs the same typecheck and build automatically in [GitHub Actions](./.github/workflows/ci.yml), so broken commits never reach the deployment.
 
 ## Deployment
 
