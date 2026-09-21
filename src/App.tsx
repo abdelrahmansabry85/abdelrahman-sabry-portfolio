@@ -46,6 +46,17 @@ const projects: Project[] = [
     outcome: 'A smooth, mobile-friendly experience with cinematic transitions, an interactive filmstrip, and an Arabic/English letter toggle.',
     details: 'React 19 and Motion power the phase transitions, Ken Burns-style image presentation, and the floating balloon physics, while Tailwind CSS 4 handles the editorial light theme. Music starts on first interaction through a YouTube/local fallback chain with a floating playback controller, and prefers-reduced-motion is respected throughout.',
   },
+  {
+    number: '04', label: 'PERSONAL SITE / LIVING HUB', title: 'Cultural Hub',
+    description: 'A cinema-inspired personal hub where films, books, and music update themselves: live Letterboxd and Goodreads feeds, curated shelves, and a self-hosted PDF library — all in one dark, brass-lit page.',
+    stack: ['Next.js 15', 'TypeScript', 'Tailwind CSS 4', 'RSS APIs', 'TMDB'], url: 'https://github.com/abdelrahmansabry85/cultural-',
+    thumbnail: '/cultural-hub.webp', screenshots: ['/cultural-hub.webp', '/cultural-hub-full.webp'],
+    problem: 'A cultural diary scattered across Letterboxd, Goodreads, and SoundCloud never tells one story — and a personal site you have to update by hand always dies after week two.',
+    decisions: 'Let the platforms be the CMS: server-side RSS routes pull films, books, and music on a cache schedule, while one data file holds the hand-curated shelves. Everything shares a single cinematic letterbox design system built purely in CSS.',
+    role: 'Design · Front-end development',
+    outcome: 'A living site that updates itself — films flow in from Letterboxd, books from Goodreads, playlists from SoundCloud, with zero manual work after publishing.',
+    details: 'Next.js 15 App Router with three server routes (Letterboxd / Goodreads / SoundCloud) that parse RSS on 30-min to daily caches to sidestep CORS. Posters come from TMDB, and book covers are rendered from the hosted PDFs’ own first pages. Pure CSS animations (letterbox intro, spotlight sway, shimmering name sweep) keep it light with no animation library. A scroll-progress section nav and an inline /admin content editor round out the experience.',
+  },
 ]
 
 const tools: Array<{ name: string; category: string; Icon: IconType }> = [
@@ -180,7 +191,7 @@ function ProjectCard({ project }: { project: Project }) {
 }
 
 function Work() {
-  return <section className="work-section page-shell section-space" id="work"><div className="section-head"><SectionLabel index="02">Selected work</SectionLabel><span className="section-aside">03 live builds</span></div><Reveal className="projects-grid">{projects.map((project, index) => <Reveal key={project.number} delay={index * 100}><ProjectCard project={project} /></Reveal>)}</Reveal></section>
+  return <section className="work-section page-shell section-space" id="work"><div className="section-head"><SectionLabel index="02">Selected work</SectionLabel><span className="section-aside">04 live builds</span></div><Reveal className="projects-grid">{projects.map((project, index) => <Reveal key={project.number} delay={index * 100}><ProjectCard project={project} /></Reveal>)}</Reveal></section>
 }
 
 function Tools() {
