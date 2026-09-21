@@ -49,7 +49,7 @@ const projects: Project[] = [
   {
     number: '04', label: 'PERSONAL SITE / LIVING HUB', title: 'Cultural Hub',
     description: 'A cinema-inspired personal hub where films, books, and music update themselves: live Letterboxd and Goodreads feeds, curated shelves, and a self-hosted PDF library — all in one dark, brass-lit page.',
-    stack: ['Next.js 15', 'TypeScript', 'Tailwind CSS 4', 'RSS APIs', 'TMDB'], url: 'https://github.com/abdelrahmansabry85/cultural-',
+    stack: ['Next.js 15', 'TypeScript', 'Tailwind CSS 4', 'RSS APIs', 'TMDB'], url: 'https://cultural-eight.vercel.app/',
     thumbnail: '/cultural-hub.webp', screenshots: ['/cultural-hub.webp', '/cultural-hub-full.webp'],
     problem: 'A cultural diary scattered across Letterboxd, Goodreads, and SoundCloud never tells one story — and a personal site you have to update by hand always dies after week two.',
     decisions: 'Let the platforms be the CMS: server-side RSS routes pull films, books, and music on a cache schedule, while one data file holds the hand-curated shelves. Everything shares a single cinematic letterbox design system built purely in CSS.',
